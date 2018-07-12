@@ -83,7 +83,7 @@
                         if (newMember.Id != message.Recipient.Id)
                         {
                             var reply = message.CreateReply();
-                            reply.Text = $"Welcome {newMember.Name}\nThis is  tvvvvvvvvvvv ChatBot!!!\n You can search:\n *Rating By Showname\n*Tvshow Name By ID\n *Schedule By showname \n *ShowInformation!";
+                            reply.Text = $"Welcome {newMember.Name}\nThis is  tvvvvvvvvvvvvvv ChatBot!!!\n You can search:\n *Rating By Showname\n*Tvshow Name By ID\n *Schedule By showname \n *ShowInformation!";
                             client.Conversations.ReplyToActivityAsync(reply);
                         }
                     }
