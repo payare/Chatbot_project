@@ -1,7 +1,8 @@
 # LUIS Bot Sample
 
-A sample bot integrated with a LUIS.ai application.
-
+A sample bot integrated with a LUIS.ai application. this chat bot is about tv show. This gives information of tv show. If user want schedule,Rating of any tvshow then user will get that.
+You can get information by using this url. After q you can write name of tv show:
+http://api.tvmaze.com/singlesearch/shows?q=
 
 
 ### Prerequisites
@@ -55,10 +56,10 @@ You'll need these two values to configure the LuisDialog through the LuisModel a
 ### Code Highlights
 
 One of the key problems in human-computer interactions is the ability of the computer to understand what a person wants, and to find the pieces of information that are relevant to their intent. In the LUIS application, you will bundle together the intents and entities that are important to your task. Read more about [Planning an Application](https://www.microsoft.com/cognitive-services/en-us/LUIS-api/documentation/Plan-your-app) in the LUIS Help Docs.
-Check out the use of LuisIntent attributes decorating [RootLuisDialog](Dialogs/RootLuisDialog.cs#L36) methods to handle LUIS Intents, for instance `[LuisIntent("SearchHotels")]`.
+Check out the use of LuisIntent attributes decorating [RootLuisDialog](Dialogs/RootLuisDialog.cs#L36) methods to handle LUIS Intents, for instance `[LuisIntent("show_name")]`.
 
 ````C#
-[LuisIntent("SearchHotels")]
+[LuisIntent("Show_name")]
 public async Task Search(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
 {
     ...
@@ -70,13 +71,13 @@ Each intent handler method accepts the `IDialogContext`, the original incoming `
 ````C#
 EntityRecommendation cityEntityRecommendation;
 
-if (result.TryFindEntity(EntityGeographyCity, out cityEntityRecommendation))
+ if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
 {
-    cityEntityRecommendation.Type = "Destination";
+    cityEntityRecommendation.Type = "showname";
 }
 ````
 
-You might notice the use of `EntityRecommendation.Type = "Destination"` in the code above. This is useful to map entity values to properties when reusing the LUIS captured entities for the  [`FormDialog<HotelsQuery>`](Dialogs/RootLuisDialog.cs#L51). The properties mapped to entities will be pre-populated. In the case of the `AirportCode` this extra step is not required since the entity name already matches the property name.
+You might notice the use of `EntityRecommendation.Type = "showname"` in the code above. This is useful to map entity values to properties when reusing the LUIS captured entities for the  [`FormDialog<HotelsQuery>`](Dialogs/RootLuisDialog.cs#L51). The properties mapped to entities will be pre-populated. In the case of the `AirportCode` this extra step is not required since the entity name already matches the property name.
 
 ````C#
 var hotelsFormDialog = new FormDialog<HotelsQuery>(hotelsQuery, this.BuildHotelsForm, FormOptions.PromptInStart, result.Entities);
@@ -91,31 +92,6 @@ Another LUIS Model Feature used is Phrase List Features, for instance, the model
 
 ![Phrase List Feature](images/highlights-phrase.png)
 
-### Spelling Correction
-
-If you want to enable spelling correction, set the `IsSpellCorrectionEnabled` key to `true` in the [Web.config](Web.config) file.
-
-Bing Spell Check API provides a module that allows you to to correct the spelling of the text. Check out the [reference](https://dev.cognitive.microsoft.com/docs/services/56e73033cf5ff80c2008c679/operations/56e73036cf5ff81048ee6727) to know more about the modules available. 
-
-[BingSpellCheckService.cs](Services/BingSpellCheckService.cs) is the core component illustrating how to call the Bing Spell Check RESTful API.
-
-In this sample we added spell correction before calling the dialog. Check out the usage in [MessagesController.cs](Controllers/MessagesController.cs).
-
-````C#
-if (IsSpellCorrectionEnabled)
-{
-    try
-    {
-        activity.Text = await this.spellService.GetCorrectedTextAsync(activity.Text);
-    }
-    catch(Exception ex)
-    {
-        Trace.TraceError(ex.ToString());
-    }
-}
-
-await Conversation.SendAsync(activity, () => new RootLuisDialog());
-````
 
 ### Outcome
 
