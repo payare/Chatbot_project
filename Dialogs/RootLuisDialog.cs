@@ -31,7 +31,7 @@
         public async Task None(IDialogContext context, LuisResult result)
         {
 
-            string message = $"How can i help you!!!.";
+            string message = $"How can i help you user!!!.";
             // await context.PostAsync("Welcome to the TVshow finder!");
             // await context.PostAsync("Enter TVshow name");
             await context.PostAsync(message);
