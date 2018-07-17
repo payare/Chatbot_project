@@ -1,9 +1,7 @@
 # Tvshow Bot Sample
 
-A sample bot integrated with a LUIS application. this chat bot is about tv  program. This gives information of tv show. If user want schedule,Rating of any tvshow then user will get that.
-You can get information by using this url. After q you can write name of tv show::
-http://api.tvmaze.com/singlesearch/shows?q=
-
+This chat bot for Tv show information.This bot gives information of tv show like schedule,Rating,url. This also gives Tv show name by using Show id.
+If we give Show name Then It gives  information of that particular Tv show. For example We give “Give information of Kumkum bhagya”. Then chat bot will display Herocard.By using that we can search show “Kumkum bhagya.”  If we want show name of particular id.Then we can write “Give show of id 9” Then It will give show name of id 9. If we ask Rating of any show then it will display Average and Weight of show.If we want to know schedule of show then we can give input as “Give schedule of Kumkum bhagya”.Chatbot will give schedule of “kumkum bhagya”
 
 ### Prerequisites
 
