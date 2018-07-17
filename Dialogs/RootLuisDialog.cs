@@ -13,7 +13,7 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using System.Net;
-    using static LuisBot.ShowDate;
+   
 
     [LuisModel("2202e54c-a80e-4fe8-ac20-fe5c5948c261 ", "b4373aa49bfa4c69af61cd188e8538b0")]
     [Serializable]
@@ -31,7 +31,7 @@
         public async Task None(IDialogContext context, LuisResult result)
         {
 
-            string message = $"How can i help you!!!!!!!!!!!.";
+            string message = $"How can i help you!!!!!!!!!!.";
             // await context.PostAsync("Welcome to the TVshow finder!");
             // await context.PostAsync("Enter TVshow name");
             await context.PostAsync(message);
@@ -43,16 +43,16 @@
          [LuisIntent("Show_name")]
         public async Task Task(IDialogContext context, LuisResult result)
         {
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
             string message = $"wait";
             await context.PostAsync(message);
 
-            if (result.TryFindEntity(Entityshowname, out cityEntityRecommendation))
+            if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
             {
-                await context.PostAsync($"Showname is Intent and Entity is'{cityEntityRecommendation.Entity}'");
+                await context.PostAsync($"Showname is Intent and Entity is'{showEntityRecommendation.Entity}'");
                // var B = GetShowData(context,result);
                 //await context.PostAsync(B.ToString());
-               await this.DisplayHerocard(context,cityEntityRecommendation.Entity);
+               await this.DisplayHerocard(context,showEntityRecommendation.Entity);
                 //await this.DisplayAnimationcard(context, cityEntityRecommendation.Entity);
             }
         }
@@ -90,12 +90,12 @@
         public async Task date(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
             string message = $"wait";
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
 
             await context.PostAsync(message);
-            if (result.TryFindEntity(EntityShowdate, out cityEntityRecommendation))
+            if (result.TryFindEntity(EntityShowdate, out showEntityRecommendation))
             {
-                await context.PostAsync($"Date is Intent and Entity is'{cityEntityRecommendation.Entity}'");
+                await context.PostAsync($"Date is Intent and Entity is'{showEntityRecommendation.Entity}'");
                var B = GetNameData(context,result);
                //await context.PostAsync(B.ToString());
 
@@ -108,13 +108,13 @@
         [LuisIntent("ID")]
         public async Task id(IDialogContext context, LuisResult result)
         {
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
             string message = $" plz wait";
             await context.PostAsync(message);
 
-            if (result.TryFindEntity(EntityShowid, out cityEntityRecommendation))
+            if (result.TryFindEntity(EntityShowid, out showEntityRecommendation))
             {
-                await context.PostAsync($"ID is Intent and Entity is'{cityEntityRecommendation.Entity}'");
+                await context.PostAsync($"ID is Intent and Entity is'{showEntityRecommendation.Entity}'");
                
                 //await context.PostAsync(B.ToString());
                 // await this.DisplayHerocard1(context, cityEntityRecommendation.Entity);
@@ -126,16 +126,16 @@
         [LuisIntent("Information")]
         public async Task info(IDialogContext context, LuisResult result)
         {
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
            // string message = $"wait";
             //await context.PostAsync(message);
 
-            if (result.TryFindEntity(Entityshowname, out cityEntityRecommendation))
+            if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
             {
-                await context.PostAsync($"Information is Intent and Entity is'{cityEntityRecommendation.Entity}'");
-               // var c = GetInfoData(context, result);
+                await context.PostAsync($"Information is Intent and Entity is'{showEntityRecommendation.Entity}'");
+               var c = GetInfoData(context, result);
                 //await context.PostAsync(B.ToString());
-               await this.DisplayHerocard(context, cityEntityRecommendation.Entity);
+               //await this.DisplayHerocard(context, showEntityRecommendation.Entity);
 
 
             }
@@ -147,13 +147,13 @@
         [LuisIntent("Schedule")]
         public async Task schedule(IDialogContext context, LuisResult result)
         {
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
             // string message = $"wait";
             //await context.PostAsync(message);
 
-            if (result.TryFindEntity(Entityshowname, out cityEntityRecommendation))
+            if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
             {
-                await context.PostAsync($"Schedule is Intent and Entity is'{cityEntityRecommendation.Entity}'");
+                await context.PostAsync($"Schedule is Intent and Entity is'{showEntityRecommendation.Entity}'");
                 var c = GetScheduleData(context, result);
                 //await context.PostAsync(B.ToString());
 
@@ -166,13 +166,13 @@
         [LuisIntent("Rating")]
         public async Task rating(IDialogContext context, LuisResult result)
         {
-            EntityRecommendation cityEntityRecommendation;
+            EntityRecommendation showEntityRecommendation;
             // string message = $"wait";
             //await context.PostAsync(message);
 
-            if (result.TryFindEntity(Entityshowname, out cityEntityRecommendation))
+            if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
             {
-                await context.PostAsync($"Rating is Intent and Entity is'{cityEntityRecommendation.Entity}'");
+                await context.PostAsync($"Rating is Intent and Entity is'{showEntityRecommendation.Entity}'");
                 var c = GetRatingData(context, result);
                 //await context.PostAsync(B.ToString());
 
@@ -188,15 +188,15 @@
             using (var client = new WebClient()) //WebClient  
             {
 
-                EntityRecommendation trainEntityRecommendation;
+                EntityRecommendation showEntityRecommendation;
 
                 client.Headers.Add("Content-Type:application/json"); //Content-Type  
                 client.Headers.Add("Accept:application/json");
-                if (result.TryFindEntity(EntityShowid, out trainEntityRecommendation))
+                if (result.TryFindEntity(EntityShowid, out showEntityRecommendation))
                 {
 
 
-                    var json = client.DownloadString("http://api.tvmaze.com/shows/" + trainEntityRecommendation.Entity);
+                    var json = client.DownloadString("http://api.tvmaze.com/shows/" + showEntityRecommendation.Entity);
                     JObject jObject = JObject.Parse(json);
                     string conversion = "";
                     conversion = jObject["name"].ToString();
@@ -217,11 +217,11 @@
             using (var client = new WebClient()) //WebClient 
             {
 
-                EntityRecommendation trainEntityRecommendation;
+                EntityRecommendation showEntityRecommendation;
 
                 client.Headers.Add("Content-Type:application/json"); //Content-Type  
                 client.Headers.Add("Accept:application/json");
-                if (result.TryFindEntity(EntityShowdate, out trainEntityRecommendation))
+                if (result.TryFindEntity(EntityShowdate, out showEntityRecommendation))
                 {
                  
                     var json = client.DownloadString("http://api.tvmaze.com/shows/1/episodesbydate?date=");
@@ -257,14 +257,14 @@
             using (var client = new WebClient()) //WebClient  
             {
 
-                EntityRecommendation trainEntityRecommendation;
+                EntityRecommendation showEntityRecommendation;
                 
                 client.Headers.Add("Content-Type:application/json"); //Content-Type  
                 client.Headers.Add("Accept:application/json");
 
-                if (result.TryFindEntity(Entityshowname, out trainEntityRecommendation))
+                if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
                 {
-                    var json = client.DownloadString("http://api.tvmaze.com/singlesearch/shows?q=" + trainEntityRecommendation.Entity);
+                    var json = client.DownloadString("http://api.tvmaze.com/singlesearch/shows?q=" + showEntityRecommendation.Entity);
                     JObject jObject = JObject.Parse(json);
                     string conversion = "";
                     conversion = jObject["schedule"]["time"].ToString();
@@ -282,6 +282,62 @@
         }
 
 
+        private async Task GetInfoData(IDialogContext context, LuisResult result)
+
+        {
+
+            using (var client = new WebClient()) //WebClient  
+            {
+
+                EntityRecommendation showEntityRecommendation;
+
+                client.Headers.Add("Content-Type:application/json"); //Content-Type  
+                client.Headers.Add("Accept:application/json");
+
+                if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
+                {
+                    var json = client.DownloadString("http://api.tvmaze.com/singlesearch/shows?q=" + showEntityRecommendation.Entity);
+                    JObject jObject = JObject.Parse(json);
+                    List<string> list = new List<string>();
+                    string conversion = "";
+                    conversion = jObject["id"].ToString();
+                    list.Add("id: " + conversion + "\n");
+                    conversion = jObject["url"].ToString();
+                    list.Add("url: " + conversion + "\n");
+                    conversion = jObject["language"].ToString();
+                    list.Add("language: " + conversion + "\n");
+                    conversion = jObject["type"].ToString();
+                    list.Add("type: " + conversion + "\n");
+                    conversion = jObject["schedule"]["time"].ToString();
+                    list.Add("time: " + conversion + "\n");
+                    conversion = jObject["schedule"]["days"].ToString();
+                    list.Add("days: " + conversion + "\n");
+                    //conversion = jObject["externals"]["tvrage"].ToString();
+                    //list.Add("externals\ntvrage: " + conversion + "\n");
+                    //conversion = jObject["externals"]["Thetvdb"].ToString();
+                    //list.Add("tvrage: " + conversion + "\n");
+                    //conversion = jObject["externals"]["imdb"].ToString();
+                    //list.Add("imdb: " + conversion + "\n");
+
+                    await context.PostAsync(string.Join("\n",list));
+
+                    // conversion = jObject["schedule"]["days"].ToString();
+                    // await context.PostAsync("DAYS: " + conversion);
+
+                    //conversion = jObject["url"].ToString();
+                    //await context.PostAsync(conversion);
+
+
+                }
+            }
+        }
+
+
+
+
+
+
+
         private async Task GetRatingData(IDialogContext context, LuisResult result)
 
         {
@@ -289,14 +345,14 @@
             using (var client = new WebClient()) //WebClient  
             {
 
-                EntityRecommendation trainEntityRecommendation;
+                EntityRecommendation showEntityRecommendation;
 
                 client.Headers.Add("Content-Type:application/json"); //Content-Type  
                 client.Headers.Add("Accept:application/json");
 
-                if (result.TryFindEntity(Entityshowname, out trainEntityRecommendation))
+                if (result.TryFindEntity(Entityshowname, out showEntityRecommendation))
                 {
-                    var json = client.DownloadString("http://api.tvmaze.com/singlesearch/shows?q=" + trainEntityRecommendation.Entity);
+                    var json = client.DownloadString("http://api.tvmaze.com/singlesearch/shows?q=" + showEntityRecommendation.Entity);
                     JObject jObject = JObject.Parse(json);
                     string conversion = "";
                     conversion = jObject["rating"]["average"].ToString();
