@@ -50,7 +50,7 @@ You'll need these two values to configure the LuisDialog through the LuisModel a
 
     Once your app is published, copy the subscription key from the application resources on the Publish App page.
 
-    ![Programmatic API Key](images/prereqs-apikey.png)
+    ![Programmatic API Key](images/key.png)
     
 
 ### Code Highlights
