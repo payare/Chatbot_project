@@ -1,7 +1,7 @@
 # Tvshow Bot Sample
 
 A sample bot integrated with a LUIS application. this chat bot is about tv show. This gives information of tv show. If user want schedule,Rating of any tvshow then user will get that.
-You can get information by using this url. After q you can write name of tv show:
+You can get information by using this url. After q you can write name of tv show::
 http://api.tvmaze.com/singlesearch/shows?q=
 
 
