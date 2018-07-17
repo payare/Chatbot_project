@@ -131,8 +131,6 @@ To get more information about how to get started in Bot Builder for .NET and Con
 > On the other hand, they are not supported and the sample won't work as expected in the following channels:
 > - Telegram
 > - SMS
-# Chatbot_project
-# Chatbot_project
+
+
 # Tvshow-chatbot
-# Tvshow-chatbot
-# Chatbot_project
