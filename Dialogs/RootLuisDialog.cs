@@ -31,7 +31,7 @@
         public async Task None(IDialogContext context, LuisResult result)
         {
 
-            string message = $"How can i help you!!!.";
+            string message = $"How can i help you user!!!.";
             // await context.PostAsync("Welcome to the TVshow finder!");
             // await context.PostAsync("Enter TVshow name");
             await context.PostAsync(message);
@@ -109,7 +109,7 @@
         public async Task id(IDialogContext context, LuisResult result)
         {
             EntityRecommendation showEntityRecommendation;
-            string message = $" plz wait";
+            string message = $" plz wait user";
             await context.PostAsync(message);
 
             if (result.TryFindEntity(EntityShowid, out showEntityRecommendation))
@@ -179,6 +179,28 @@
 
             }
         }
+
+
+        
+        [LuisIntent("Thanks")]
+        public async Task thanks(IDialogContext context, LuisResult result)
+        {
+
+            string message = $"ok thanks for using this bot!!!.";
+            // await context.PostAsync("Welcome to the TVshow finder!");
+            // await context.PostAsync("Enter TVshow name");
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+
+        }
+
+
+
+
+
+
+
 
 
         private async Task GetShowData(IDialogContext context, LuisResult result)
